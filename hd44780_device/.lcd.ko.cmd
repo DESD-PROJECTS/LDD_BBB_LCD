@@ -1,0 +1,1 @@
+cmd_/home/sunbeam/Documents/HACK-2/single_device/lcd.ko := arm-linux-gnueabihf-ld -r  -EL -T ./scripts/module-common.lds -T ./arch/arm/kernel/module.lds  --build-id  -o /home/sunbeam/Documents/HACK-2/single_device/lcd.ko /home/sunbeam/Documents/HACK-2/single_device/lcd.o /home/sunbeam/Documents/HACK-2/single_device/lcd.mod.o ;  true
