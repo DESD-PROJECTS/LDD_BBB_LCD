@@ -10,7 +10,7 @@
 
 #include "bbb_ioctl.h"  // Include IOCTL header for user-space communication
 
-#define I2C_BUS_AVAILABLE   (   1  )                 // I2C Bus available in BBB
+#define I2C_BUS_AVAILABLE   (   2  )                 // I2C Bus available in BBB
 #define SLAVE_DEVICE_NAME   ("PCF8574")              // Device and Driver Name
 #define LCD_SLAVE_ADDR      (  0x27 )                // LCD Slave Address (adjust according to your device)
 
@@ -31,12 +31,12 @@ static int lcd_send_data(unsigned char data)
     buf[0] = high_nibble | 0x0D;       // RS = 1 (data mode), RW = 0 (write), E = 1 (enable)
     buf[1] = high_nibble | 0x09;       // RS = 1, RW = 0, E = 0 (disable)
     if (i2c_master_send(lcd_i2c_client, buf, 2) < 0) {
-        pr_err("Error sending high nibble\n");
+         pr_err("Error sending high nibble, return code: %d\n", i2c_master_send(lcd_i2c_client, buf, 2));
         return -1;
     }
 
     // Delay (same as in lcd.c)
-    usleep_range(40, 50);  // 40-50µs delay as required for the LCD
+    usleep_range(100, 150);  // 40-50µs delay as required for the LCD //changed from (40,50)
 
     // Send the lower nibble
     buf[0] = low_nibble | 0x0D;        // RS = 1 (data mode), RW = 0, E = 1
@@ -47,7 +47,7 @@ static int lcd_send_data(unsigned char data)
     }
 
     // Delay (same as in lcd.c)
-    usleep_range(40, 50);  // 40-50µs delay
+    usleep_range(100, 150);  // 40-50µs delay
 
     return 0;
 }
@@ -137,9 +137,11 @@ static struct i2c_board_info lcd_i2c_board_info = {
 static int __init lcd_driver_init(void)
 {
     int ret = -1;
-    lcd_i2c_adapter = i2c_get_adapter(I2C_BUS_AVAILABLE + 1);
+    lcd_i2c_adapter = i2c_get_adapter(I2C_BUS_AVAILABLE);
     if (lcd_i2c_adapter != NULL) {
-        lcd_i2c_client = i2c_new_probed_device(lcd_i2c_adapter, &lcd_i2c_board_info, NULL, NULL);
+    	// Set the I2C clock speed (bus frequency) to 100 kHz
+       // lcd_i2c_adapter->bus_clk_rate = 100000;  // Standard I2C speed
+        lcd_i2c_client = i2c_new_device(lcd_i2c_adapter, &lcd_i2c_board_info);
         if (lcd_i2c_client != NULL) {
             i2c_add_driver(&lcd_driver);
             pr_info("LCD Driver Added\n");

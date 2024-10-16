@@ -47,11 +47,12 @@ __attribute__((section("__versions"))) = {
 	{ 0x5f754e5a, "memset" },
 	{ 0xc38c83b8, "mod_timer" },
 	{ 0x526c3a6c, "jiffies" },
+	{ 0x24d273d1, "add_timer" },
+	{ 0x7c32d0f0, "printk" },
+	{ 0x2e5810c6, "__aeabi_unwind_cpp_pr1" },
 	{ 0xddc1fca4, "gpiod_set_raw_value" },
 	{ 0x395c5ae9, "gpio_to_desc" },
 	{ 0x12a38747, "usleep_range" },
-	{ 0x2e5810c6, "__aeabi_unwind_cpp_pr1" },
-	{ 0x7c32d0f0, "printk" },
 	{ 0xb1ad28e0, "__gnu_mcount_nc" },
 };
 

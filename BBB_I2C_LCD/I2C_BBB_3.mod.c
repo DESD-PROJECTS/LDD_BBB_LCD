@@ -30,7 +30,7 @@ __attribute__((section("__versions"))) = {
 	{ 0x728d218, "i2c_unregister_device" },
 	{ 0xa3287a5d, "i2c_put_adapter" },
 	{ 0x84dc8cc8, "i2c_register_driver" },
-	{ 0xc1b11c8a, "i2c_new_probed_device" },
+	{ 0xde72f9f, "i2c_new_device" },
 	{ 0x73e1d3e2, "i2c_get_adapter" },
 	{ 0xf9a482f9, "msleep" },
 	{ 0xdb7305a1, "__stack_chk_fail" },

@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/ioctl.h>
+#include <linux/i2c.h>
 #include "bbb_lcd.h"
 #include "bbb_ioctl.h"
 
@@ -13,7 +14,8 @@ int main(int argc, char *argv[])  // Change 'void *argv[]' to 'char *argv[]'
     char buf[32];
     struct ioctl_msg msg;
 
-    fd = open("/dev/bbb_lcd0", O_WRONLY);
+   // fd = open("/dev/bbb_lcd0", O_WRONLY);
+   fd = open("/dev/i2c-2", O_WRONLY);
     if (fd < 0)
     {
         perror("open() failed\n");

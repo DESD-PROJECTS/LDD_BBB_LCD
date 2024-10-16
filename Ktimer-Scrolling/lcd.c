@@ -103,7 +103,7 @@ static __init int lcd_init(void)
     
      // Timer setup for scrolling
     timer_setup(&lcd_scroll_timer, lcd_scroll, 0);
-
+    
     return 0;
 
 lcd_all_pin_init_failed:
@@ -548,6 +548,7 @@ static void lcd_scroll(struct timer_list *t) {
 static void lcd_start_scroll(int direction) {
     scroll_direction = direction;
     scroll_active = 1;
+    add_timer(&lcd_scroll_timer);
     mod_timer(&lcd_scroll_timer, jiffies + 1 * HZ); // Start timer with 1 second delay
 }
 
@@ -555,6 +556,10 @@ static void lcd_start_scroll(int direction) {
 static void lcd_stop_scroll(void) {
     scroll_active = 0;
     del_timer_sync(&lcd_scroll_timer); // Stop the timer
+}
+
+void lcd_command(char command) {
+    lcd_instruction(command);
 }
 
 

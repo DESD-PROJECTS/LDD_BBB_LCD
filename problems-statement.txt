@@ -1,0 +1,17 @@
+Embedded Development Tasks:
+
+Write a user-space application to drive the HD44780 LCD by GPIO from Beaglebone Black.
+Write an Embedded Linux device driver to drive the HD44780 LCD.
+write(): Write text to be displayed.
+read(): Read text getting displayed (previously written).
+ioctl():
+Clear screen.
+Set screen address (LINE1 or LINE2).
+Start scrolling.
+Stop scrolling.
+Implement scroll functionality using a kernel timer.
+Write a user-space application to test all functionalities.
+Modify the device driver to drive an I2C-based HD44780 LCD and test it with the user-space application.
+Use the device tree concept to detect the device as a platform device and handle device-driver matching.
+Suggested: Use the latest available image/kernel for Beaglebone Black.
+Help: https://github.com/niekiran/linux-device-driver-1
