@@ -1,4 +1,4 @@
-TARGET = I2C_BBB_3
+TARGET = BBB_I2C_LCD
 obj-m = $(TARGET).o
 
 modules :

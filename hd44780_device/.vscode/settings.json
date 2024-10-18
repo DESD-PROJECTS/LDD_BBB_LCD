@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "typeinfo": "c",
-        "cdev.h": "c",
-        "mutex.h": "c",
-        "sched.h": "c"
-    },
-    "git.ignoreLimitWarning": true
-}
